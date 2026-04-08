@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>ValhallaBiome</AssemblyName>
+    <RootNamespace>ValhallaBiome</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Update these paths to match your environment -->
+  <PropertyGroup>
+    <ValheimDir></ValheimDir>
+    <BepInExDir></BepInExDir>
+    <PluginOutputDir>$(BepInExDir)\plugins\ValhallaBiome</PluginOutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- BepInEx -->
+    <Reference Include="BepInEx">
+      <HintPath></HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath></HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Jotunn -->
+    <Reference Include="Jotunn">
+      <HintPath></HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Valheim -->
+    <Reference Include="assembly_valheim">
+      <HintPath>$(ValheimDir)\valheim_Data\Managed\assembly_valheim.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Unity -->
+    <Reference Include="UnityEngine">
+      <HintPath>$(ValheimDir)\valheim_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ValheimDir)\valheim_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>$(ValheimDir)\valheim_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(ValheimDir)\valheim_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Auto-deploy: copy DLL + bundle to plugins folder on build -->
+  <Target Name="DeployPlugin" AfterTargets="Build">
+    <MakeDir Directories="$(PluginOutputDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PluginOutputDir)" />
+    <Copy SourceFiles="$(ProjectDir)biomeflora" DestinationFolder="$(PluginOutputDir)" Condition="Exists('$(ProjectDir)biomeflora')" />
+  </Target>
+
+</Project>

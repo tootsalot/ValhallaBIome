@@ -1,0 +1,10 @@
+{
+  "name": "ValhallaBiome",
+  "version_number": "2.0.2",
+  "website_url": "",
+  "description": "Biome vegetation overhaul with custom trees, bushes, rocks, crystals, mushrooms, corals, clutter, and optional vanilla clutter reduction.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2333",
+    "ValheimModding-Jotunn-2.28.0"
+  ]
+}
